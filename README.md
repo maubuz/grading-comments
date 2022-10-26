@@ -1,5 +1,8 @@
 # Commenting API Example
 
+> Based on Microsoft's VS Code Extension [Example for using the Comments API](https://github.com/microsoft/vscode-extension-samples/tree/main/comment-sample).
+
+
 This sample shows
 
 - How to create a comment controller.
