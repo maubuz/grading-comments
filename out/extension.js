@@ -31,6 +31,25 @@ function activate(context) {
     context.subscriptions.push(vscode.commands.registerCommand("mywiki.createNote", (reply) => {
         replyNote(reply);
     }));
+    context.subscriptions.push(vscode.commands.registerCommand("mywiki.createGHComment", 
+    // (reply: vscode.CommentReply) => {
+    () => {
+        /* __GDPR__
+            "pr.createComment" : {}
+        */
+        const newComment = new NoteComment("Hello Test", vscode.CommentMode.Preview, { name: "vscode" }, undefined, undefined);
+        console.log("Running create GH comment");
+        // console.log("Reply text: " + reply);
+        vscode.commands.executeCommand("pr.createSingleComment", {
+            thread: undefined,
+            text: "HelloThere",
+        });
+        // const handler = resolveCommentHandler(reply.thread);
+        // console.log(reply.text);
+        // if (handler) {
+        // 	handler.createOrReplyComment(reply.thread, reply.text, false);
+        // }
+    }));
     context.subscriptions.push(vscode.commands.registerCommand("mywiki.createGradingComment", async () => {
         console.log("Executing command");
         const preFilledComment = "Dummy annotation";

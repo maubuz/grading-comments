@@ -53,6 +53,40 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand(
+      "mywiki.createGHComment",
+      // (reply: vscode.CommentReply) => {
+      () => {
+        /* __GDPR__
+			"pr.createComment" : {}>
+		*/
+
+        const newComment = new NoteComment(
+          "Hello Test",
+          vscode.CommentMode.Preview,
+          { name: "vscode" },
+          undefined,
+          undefined,
+        );
+
+        console.log("Running create GH comment");
+        // console.log("Reply text: " + reply);
+        vscode.commands.executeCommand("pr.createSingleComment", {
+          thread: undefined,
+          text: "HelloThere",
+        });
+
+        // const handler = resolveCommentHandler(reply.thread);
+        // console.log(reply.text);
+
+        // if (handler) {
+        // 	handler.createOrReplyComment(reply.thread, reply.text, false);
+        // }
+      },
+    ),
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand(
       "mywiki.createGradingComment",
       async () => {
         console.log("Executing command");
@@ -66,7 +100,7 @@ export function activate(context: vscode.ExtensionContext) {
     ),
   );
 
-  async function getGraddingComment(preFilledText:string): Promise<string> {
+  async function getGraddingComment(preFilledText: string): Promise<string> {
     const editor = vscode.window.activeTextEditor;
     if (editor == undefined) throw new Error("Editor is undefined");
 
